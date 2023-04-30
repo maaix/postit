@@ -11,17 +11,20 @@ function App() {
       async function getAllNotes() {
           const response = await api.get('/annotations/show-annotations');
           setAllNotes(response.data);
-          // console.log(response);
+          //  console.log(response);
+          
           
       }
       getAllNotes();
-  },[allNotes])
+  },[])
   return (
     <div className='app'>
       <Sidebar/>
       <ul id ='notecard-list-area'>
-        {allNotes.map(data => (
-          <Notecard data = {data}/>
+        {allNotes.map((data,index)=> (
+          <Notecard mykey = {index} data = {data} matherlist = {allNotes}/>
+          
+          
         ))}
       </ul>
     </div>
