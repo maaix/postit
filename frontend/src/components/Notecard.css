@@ -1,47 +1,60 @@
-div.notepad-info div{
-    display: flex;
-    justify-content: space-between;
+div.notepad-info div {
+  display: flex;
+  justify-content: space-between;
 }
 
 div.notepad-info {
-   background-color: #fff;
-   border-radius: 10px;
-   padding:20px;
-   width: 100%;
-   display: grid;
-   grid-template-columns: 1fr;
-   grid-template-rows: 0.1fr 3fr 0.1fr;
-   box-shadow: 0 0 14px 0 rgba(0,0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  height: 400px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.1fr 3fr 0.1fr;
+  box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.2);
 }
 
-div.notepad-info strong{
-    display: block;
-    font-size: 28px;
-    color: #333;
+div.notepad-info strong {
+  display: block;
+  font-size: 28px;
+  color: #333;
 }
-.card-icon{
-    color: #666666;
-    cursor: pointer;
-    height: 24px;
-    font-size: 24px;
-    font-style: bold;
+.card-icon {
+  color: #666666;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  font-size: 24px;
+  font-style: bold;
+  /* background-color: aquamarine; */
 }
-.card-header{
+.card-header:hover {
+  cursor: default;
 }
-.card-icon:hover{
-    color:#eb8f7a;
-    transform: 0.2s;
+.crud-icons {
+  display: flex;
+  flex-direction: row;
+  /* background-color: antiquewhite; */
+  gap: 15px;
 }
-div.notepad-info textarea{
-    padding: 7px;
-    margin-top: 7px;
-    margin-bottom: 5px;
-    width: 100%;
-    height: 100%;
-    font-size: 14px;
-    border: 0;
-    background-color: #fff;
-    resize: none;
-    font-size: 22px;
-    color: #646464;
+.card-icon:hover {
+  color: #eb8f7a;
+  transform: 0.2s;
+}
+div.notepad-info textarea {
+  padding: 7px;
+  margin-top: 7px;
+  margin-bottom: 5px;
+  width: 100%;
+  height: 95%;
+  font-size: 14px;
+  border: 0;
+  background-color: #fff;
+  resize: none;
+  font-size: 22px;
+  color: #646464;
+}
+div.notepad-info textarea:hover {
+  cursor: default;
 }

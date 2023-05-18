@@ -1,10 +1,14 @@
 import './Sidebar.css';
 import React, {useState,useEffect} from 'react';
 import api from '../services/api';
+import Radiobutton from './Radiobutton';
 
-export default function Sidebar() {
+export default function Sidebar(props) {
     const [title,setTitle] = useState();
     const [notes,setNotes] = useState();
+    async function rerenderList(isTrue){
+        await props.notecardToApp(isTrue);
+    }
    
     async function handleSubmit(e){
         e.preventDefault();
@@ -15,8 +19,21 @@ export default function Sidebar() {
         })
         setNotes('');
         setTitle('');
+        rerenderList(true);
         return response
     }
+    function radiobuttonToSidebar(notecardfilter) {
+        // setFilter(notecardfilter);
+    }
+
+    useEffect(() => {
+        let saveButton = document.getElementById('btn_submit');
+        saveButton.style.background = '#FFD3CA';
+        if (title && notes){
+            saveButton.style.background = '#EB8F7A'
+        }
+    },[title,notes])
+
     return (
       <div className="sidebar">
             <h1>Notebook</h1>
@@ -38,8 +55,9 @@ export default function Sidebar() {
                     ></textarea>
                 </div>
         
-                <button type="submit">Save</button>
+                <button type="submit" id = 'btn_submit'>Save</button>
             </form>
+            <Radiobutton radiobuttonToSidebar = {radiobuttonToSidebar}/>
       </div>
     );
 }
