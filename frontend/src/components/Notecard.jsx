@@ -35,6 +35,8 @@ export default function Notecard(props){
             setPriority(props.data.priority)
     },[])
 
+    /* This effect will define the initial style of the card notes 
+    and update them when the priority is changed */
     useEffect(()=>{
         if(priority === true){
             setPriorityStyle({
@@ -52,6 +54,7 @@ export default function Notecard(props){
         }
     },[priority])
 
+    // This effect sets the style properties of all the objects inside of the cards components
     useEffect(() => {
         notecard.current.style.backgroundColor = priorityStyle.notecardColor;
         titleField.current.style.color = priorityStyle.fontColor;
@@ -62,36 +65,28 @@ export default function Notecard(props){
         deleteIcon.current.style.color = priorityStyle.fontColor;
     })
 
-    // useEffect(() => {
-    //     setOldIndex(index)
-    // },[])
+    //This fucttion warn the father component of the cards to rerender the list of cards
     async function rerenderList(isTrue){
        await props.notecardToApp(isTrue);
     }
+
+    /*This function calls a delete request through the axios api e then calls 
+    the function "rerenderList" above to reload the page */ 
     async function handleDelete (e) {
         e.preventDefault();
         const response = await api.delete(`/annotations/delete-annotations/${objectId}`);
-        
         rerenderList(true);
-      
         return response
     }
 
+    /*This function change  and update the priority state after trigger the button click event 
+    on the card priority icon */
     async function handlePriority(e) {
         e.preventDefault();
 
         if(priority === true){
-            // setPriorityStyle({
-            //     notecardColor: '#fff',
-            //     textareaColor: '#fff'
-            // })      
             setPriority(false);  
-            
         } else {
-            // setPriorityStyle({
-            //     notecardColor: '#eb8f7a',
-            //     textareaColor:'#eb8f7a'
-            // })  
             setPriority(true)
             // setIndex(0);
             // const deletedItem = allNotes.splice(oldIndex,1);
@@ -106,7 +101,8 @@ export default function Notecard(props){
 
         return response;
     }
-
+    // This function sets the style of the textarea and title of the cards after 
+    // the button of edit is clicked
     function handleEdit (e) {
         e.preventDefault();
         titleField.current.style.cursor = 'text';
@@ -114,7 +110,8 @@ export default function Notecard(props){
         textarea.current.style.border ='1px solid  rgb(199, 199, 199)'
         titleField.current.contentEditable = true;
     }
-
+    //This function captures the key pressed when the edit mode is activaded 
+    //and update the card with new informatins
     async function handleKey (e) {
         if(e.key === 'Enter'){
             const response = await api.post(`/annotations/update-annotations/${objectId}`,{
@@ -126,6 +123,7 @@ export default function Notecard(props){
         }
     }
 
+    // This function reset the style of the cards when the foreign area of the card is clicked
    async function resetStyle (e) {
         e.preventDefault()
         titleField.current.style.cursor = 'pointer';
@@ -142,41 +140,38 @@ export default function Notecard(props){
     
     return (
         <>
-            <div className="notepad-info" ref={notecard} id = {objectId}>
-                <div className='card-header'>
-                    <strong 
-
-                        ref = {titleField}
-                        onKeyDown = {handleKey}
-                        onChange={e => setTitle(e.target.value)}>{props.data.title}
-                        
-                    </strong>
-                    <div className="crud-icons">
-                        <div onBlur = {resetStyle} ref = {editIcon} className='card-icon' >< BsFillPencilFill size={24}/></div>
-                        <div ref = {deleteIcon} className='card-icon'onClick={handleDelete}><BsFillTrash3Fill size={24}/></div>
-                    </div>
-                   
-                </div>
-                
-                <textarea 
-                    className = 'anotations-description '
-                    // contentEditable = 'False' 
-                    ref={textarea} 
-                    onClick={handleEdit}
-                    onBlur = {resetStyle} 
+        <div className="notepad-info" ref={notecard} id = {objectId}>
+            <div className='card-header'>
+                <strong 
+                    ref = {titleField}
                     onKeyDown = {handleKey}
-                    defaultValue = {objectId}
-                    onChange = {e => setNotes(e.target.value)}
-                    
-                    
-                ></textarea>
+                    onChange={e => setTitle(e.target.value)}>{props.data.title}
+                </strong>
 
-                <div 
-                    className='card-icon' 
-                    ref = {priorityIcon}
-                    onClick={handlePriority}>
-                <BsExclamationCircleFill size={24}/></div>
+                <div className="crud-icons">
+                    <div onBlur = {resetStyle} ref = {editIcon} className='card-icon' >< BsFillPencilFill size={24}/></div>
+                    <div ref = {deleteIcon} className='card-icon'onClick={handleDelete}><BsFillTrash3Fill size={24}/></div>
+                </div>
             </div>
+            
+            <textarea 
+                className = 'anotations-description '
+                // contentEditable = 'False' 
+                ref={textarea} 
+                onClick={handleEdit}
+                onBlur = {resetStyle} 
+                onKeyDown = {handleKey}
+                defaultValue = {objectId}
+                onChange = {e => setNotes(e.target.value)}
+            ></textarea>
+
+            <div 
+                className='card-icon' 
+                ref = {priorityIcon}
+                onClick={handlePriority}
+            ><BsExclamationCircleFill size={24}/>
+            </div>
+        </div>
         </>
     );
 };

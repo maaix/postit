@@ -6,10 +6,13 @@ import Radiobutton from './Radiobutton';
 export default function Sidebar(props) {
     const [title,setTitle] = useState();
     const [notes,setNotes] = useState();
+
+      //This fucttion warn the father component(App) of the cards to rerender the list of cards
     async function rerenderList(isTrue){
         await props.notecardToApp(isTrue);
     }
    
+    //This function calls a post request through axios api and save the data 
     async function handleSubmit(e){
         e.preventDefault();
         const response = await api.post('annotations/add-annotations', { 
@@ -22,10 +25,12 @@ export default function Sidebar(props) {
         rerenderList(true);
         return response
     }
+    
     function radiobuttonToSidebar(notecardfilter) {
         // setFilter(notecardfilter);
     }
 
+    //This use effect actives the save button when the inputs are filled
     useEffect(() => {
         let saveButton = document.getElementById('btn_submit');
         saveButton.style.background = '#FFD3CA';
@@ -35,7 +40,7 @@ export default function Sidebar(props) {
     },[title,notes])
 
     return (
-      <div className="sidebar">
+        <div className="sidebar">
             <h1>Notebook</h1>
     
             <form onSubmit={handleSubmit}>
@@ -57,8 +62,9 @@ export default function Sidebar(props) {
         
                 <button type="submit" id = 'btn_submit'>Save</button>
             </form>
+
             <Radiobutton radiobuttonToSidebar = {radiobuttonToSidebar}/>
-      </div>
+        </div>
     );
 }
 
