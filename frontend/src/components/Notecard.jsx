@@ -1,4 +1,4 @@
-import './Notecard.css'
+import './Notecard.scss'
 import React from 'react';
 import api from '../services/api';
 
@@ -13,8 +13,6 @@ import { BsExclamationCircleFill } from 'react-icons/bs'
 import { BsFillPencilFill } from "react-icons/bs";
 
 export default function Notecard(props){
-    const [oldIndex,setOldIndex] = useState(0);
-    const [allNotes,setAllNotes] = useState(props.matherlist);
     const[objectId,setObjectId] = useState(props.data._id);
     const [priority,setPriority] = useState(props.data.priority);
     const [priorityStyle,setPriorityStyle] = useState({});
@@ -29,9 +27,6 @@ export default function Notecard(props){
     
     
     useEffect(() => {
-            // setAllNotes(props.matherlist);
-            // setObjectId(props.data._id);
-            // setIndex(props.mykey);
             setPriority(props.data.priority)
     },[])
 
@@ -88,11 +83,6 @@ export default function Notecard(props){
             setPriority(false);  
         } else {
             setPriority(true)
-            // setIndex(0);
-            // const deletedItem = allNotes.splice(oldIndex,1);
-            // console.log('item deletado:',deletedItem);
-            // setAllNotes(allNotes.unshift(deletedItem));
-            // console.log('todas as notas', allNotes);
         }
        
         const response = await api.post(`/annotations/priority/update-priority/${objectId}`,{
@@ -161,7 +151,7 @@ export default function Notecard(props){
                 onClick={handleEdit}
                 onBlur = {resetStyle} 
                 onKeyDown = {handleKey}
-                defaultValue = {objectId}
+                defaultValue = {props.data.notes}
                 onChange = {e => setNotes(e.target.value)}
             ></textarea>
 
@@ -169,7 +159,7 @@ export default function Notecard(props){
                 className='card-icon' 
                 ref = {priorityIcon}
                 onClick={handlePriority}
-            ><BsExclamationCircleFill size={24}/>
+            ><BsExclamationCircleFill className='card-icon'size={24}/>
             </div>
         </div>
         </>

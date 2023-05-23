@@ -1,3 +1,4 @@
+@import "../App.scss";  
 div.notepad-info div {
   display: flex;
   justify-content: space-between;
@@ -21,7 +22,7 @@ div.notepad-info strong {
   color: #333;
 }
 .card-icon {
-  color: #666666;
+  // color: #666666;
   cursor: pointer;
   height: 24px;
   width: 24px;
@@ -39,7 +40,7 @@ div.notepad-info strong {
   gap: 15px;
 }
 .card-icon:hover {
-  color: #eb8f7a;
+  color: #efc8bf;
   transform: 0.2s;
 }
 div.notepad-info textarea {
@@ -57,4 +58,25 @@ div.notepad-info textarea {
 }
 div.notepad-info textarea:hover {
   cursor: default;
+}
+div.notepad-info{
+  
+  @include notecard-defult-style ($smartphone-card-heihgt);
+  @include notecard-media;
+  div.card-header{
+    strong{
+      @include h2-defult-style;
+    }
+    .crud-icons{
+
+    }
+
+  }
+  textarea{
+    @include sidebar-inputs-media('textarea-input');
+    font-size: $text-min-font-size;
+  }
+  .card-icon{
+    background:$icon-responsive-size;
+  }
 }

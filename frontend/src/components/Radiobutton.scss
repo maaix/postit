@@ -1,0 +1,45 @@
+@import "../App.scss";  
+.radio-area {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    align-items: center;
+    .radio-wrapper{
+        display: flex;
+        gap: 5px;
+        font-size: $text-min-font-size;
+        align-items: center;
+        // input{
+        //     accent-color:$text-color;
+        //     border: 1px solid white;
+        //     width: 15px;
+        //     display: grid;
+        //     place-content: center;
+        // }
+        input{
+            appearance: none;
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+           margin: 5px;
+          
+            /* For a circular appearance we need a border-radius. */
+            border-radius: 50%;
+          
+            /* The background will be the radio dot's color. */
+            background: #FF572233;
+          
+            /* The border will be the spacing between the dot and the outer circle */
+            border: 3px solid #FFF;
+          
+            /* And by creating a box-shadow with no offset and no blur, we have an outer circle */
+            box-shadow: 0 0 0 1px $text-color;
+        }
+        input:checked{
+            background: $text-color;
+        }
+       
+    }
+}
+
+

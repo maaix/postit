@@ -1,0 +1,26 @@
+$main-theme-color: rgb(246, 246, 246);
+$text-color: #eb8f7a;
+$min-width: 230px;
+$normal-input-size: 40px;
+$textarea-input-size: 125px;
+
+// Responsive font sizes
+$h2-min-font-size: calc(0.5rem + 1vw);
+$h1-min-font-size: calc(1rem + 1vw);
+$text-min-font-size: calc(0.5rem + 0.5vw);
+
+$icon-responsive-size: $h2-min-font-size;
+
+
+
+
+// Sreen width variables
+$smartphones: 480px;
+$tablets: 768px;
+$laptops: 1024px;
+$desktops: 1200px;
+
+$one-column: 1fr;
+$two-columns: 1fr 1fr;
+$smartphone-card-heihgt: 300px;
+

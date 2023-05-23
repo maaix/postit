@@ -1,0 +1,170 @@
+@mixin vertical-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+@mixin h1-defult-style {
+    // font-size: $h1-min-font-size;
+    font-size: $h1-min-font-size;
+    justify-content: center;
+    display: flex;
+    color: #333;
+    height: fit-content;
+}
+@mixin h2-defult-style {
+    color: #666666;
+    font-size: $h2-min-font-size;
+    font-weight: bold;
+    display: block;
+}
+
+@mixin sidebar-style-default {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 14px 0 rgba(0,0, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+@mixin two-columns-grid {
+    display: grid;
+    grid-template-columns: $two-columns;
+    gap: 25px;
+    list-style: none;
+}
+
+@mixin one-column-grid {
+    display: grid;
+    grid-template-columns: $one-column;
+    gap: 25px;
+    list-style: none;
+}
+
+@mixin input-default-style{
+    width: 100%;
+    border: 1px solid  rgb(199, 199, 199);
+    background-color: #fff;
+    display: flex;
+    font-size: 22px;
+    color: #646464;
+}
+
+@mixin notecard-defult-style($newHeight){
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    height: $newHeight;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.1fr 3fr 0.1fr;
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.2);
+}
+
+@mixin app-screen {
+    @media screen {
+        @media (min-width: $tablets) and  (max-width: $laptops) {
+            flex-direction: row;
+            gap: 25px;
+        }  
+        @media (min-width: $laptops) {
+            flex-direction: row;
+            gap: 25px;
+        }  
+    }
+}
+
+@mixin sidebar-media {
+    @media screen {
+        @media (max-width: $smartphones) {
+            margin-left: 0;
+            padding: 0;
+            width: 100%;
+        }
+        @media (min-width: $tablets) and  (max-width: $laptops) {
+            width: 30%;
+        }  
+        @media (min-width: $laptops) {
+            width: 30%;
+        } 
+       
+    }
+}
+
+@mixin sidebar-form-media {
+    @media screen {
+        @media (max-width: $smartphones) {
+            
+            width: 100%;
+            
+        }
+        @media (min-width: $tablets) and  (max-width: $laptops) {
+            
+        }  
+        @media (min-width: $laptops) {
+            
+        } 
+    }
+}
+
+@mixin sidebar-inputs-media($input-type){
+    $input:0;
+    @if $input-type == 'normal-input'{
+        $input:$normal-input-size;
+    } @else if $input-type == 'textarea-input'{
+        $input:$textarea-input-size;
+    }
+    @media screen {
+        @media (max-width: $smartphones) {
+            height: $input;
+        }
+        @media (min-width: $smartphones) and  (max-width: $tablets) {
+            height: $input + 10;
+        }  
+        @media (min-width: $tablets) and  (max-width: $laptops) {
+          height: $input + 20;
+        }  
+        @media (min-width: $laptops) {
+            height: $input + 30;
+        } 
+       
+    }
+}
+
+@mixin notecard-list-media-screen {
+    @media screen {
+        @media (max-width: $smartphones) {
+            @include one-column-grid;
+        }
+        @media (min-width: $smartphones) and  (max-width: $tablets) {
+            @include two-columns-grid;
+        }   
+        @media (min-width: $tablets) and  (max-width: $laptops) {
+          
+            @include two-columns-grid;
+        }     
+        @media (min-width: $laptops) {
+            @include two-columns-grid;
+        }     
+    }
+    
+}
+
+@mixin notecard-media {
+    @media screen {
+        @media (max-width: $smartphones) {
+           
+        }
+        @media (min-width: $smartphones) and  (max-width: $tablets) {
+            min-width: none;
+        }   
+        @media (min-width: $tablets) and  (max-width: $laptops) {
+          
+        }     
+        @media (min-width: $laptops) {
+        }     
+    }
+    
+}

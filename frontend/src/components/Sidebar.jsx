@@ -1,4 +1,4 @@
-import './Sidebar.css';
+import './Sidebar.scss';
 import React, {useState,useEffect} from 'react';
 import api from '../services/api';
 import Radiobutton from './Radiobutton';
@@ -6,9 +6,10 @@ import Radiobutton from './Radiobutton';
 export default function Sidebar(props) {
     const [title,setTitle] = useState();
     const [notes,setNotes] = useState();
+    const [selected,setSelected] = useState('');
 
       //This fucttion warn the father component(App) of the cards to rerender the list of cards
-    async function rerenderList(isTrue){
+    async function rerenderListt(isTrue){
         await props.notecardToApp(isTrue);
     }
    
@@ -22,13 +23,26 @@ export default function Sidebar(props) {
         })
         setNotes('');
         setTitle('');
-        rerenderList(true);
+        rerenderListt(true);
         return response
     }
     
-    function radiobuttonToSidebar(notecardfilter) {
-        // setFilter(notecardfilter);
+    const radiobuttonToSidebar = async (filteredNotes) => {
+        setSelected(filteredNotes);
+        console.log("o selecionado em Sidebar é: "+ selected);
     }
+
+    async function rerenderList(filteredList){
+        await props.sidebarToApp(filteredList);
+    }
+  
+
+    useEffect(() => {
+           
+            rerenderList(selected);
+            console.log("Mandando selecionado pro App:"+selected)
+        
+    },[selected])
 
     //This use effect actives the save button when the inputs are filled
     useEffect(() => {
@@ -63,7 +77,7 @@ export default function Sidebar(props) {
                 <button type="submit" id = 'btn_submit'>Save</button>
             </form>
 
-            <Radiobutton radiobuttonToSidebar = {radiobuttonToSidebar}/>
+            <Radiobutton className="radio" radiobuttonToSidebar = {radiobuttonToSidebar}/>
         </div>
     );
 }

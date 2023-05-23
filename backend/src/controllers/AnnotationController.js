@@ -22,6 +22,18 @@ module.exports.read = async (request, response) => {
     return response.json(annotationList);
 };
 
+module.exports.readPrioritedAnottations = async (request, response) => {
+    const annotationList = await Annotations.find({priority: true});
+
+    return response.json(annotationList);
+};
+
+module.exports.readNotPrioritedAnottations = async (request, response) => {
+    const annotationList = await Annotations.find({priority: false});
+
+    return response.json(annotationList);
+};
+
 module.exports.remove = async (request,response) => {
     const { id } = request.params;
     const annotationDeleted = await Annotations.findOneAndDelete({ _id:id });

@@ -1,39 +1,74 @@
 import React from "react";
-import './Radiobutton.css'
+import './Radiobutton.scss'
 import { useState } from "react";
 import { useEffect } from "react";
 
-export default function Radiobutton({radiobuttonToSidebar}){
-    const [selected,setSelected] = useState('')
+export default function Radiobutton(props){
+    const [selected,setSelected] = useState('btnradio1');
 
-   useEffect(() => {
-    console.log(selected)
-    
-    if(selected !== selected){
-        let radio = document.getElementById(`{radio[i]}`)
+    async function rerenderList(filteredList){
+        await props.radiobuttonToSidebar(filteredList);
     }
-   },[selected])
+  
+
+    useEffect(() => {
+            console.log("Selecionado em radio é:"+selected)
+            rerenderList(selected);
+        
+    },[selected])
+
+   
+    
+    // console.log(selected)
+    // if(selected !== selected){
+    //     let radio = document.getElementById(`{radio[i]}`)
+    // }
+
+
+
     return (
-        <div className="radio-area">
-            <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" onClick={ e => setSelected(e.target.id)}></input>
-                <label className="form-check-label" htmlFor="defaultCheck1">
-                    All notes
-                </label>
+       
+            <div className="radio-area" role="group" aria-label="Basic radio toggle button group">
+            
+                <div className="radio-wrapper">
+                    <input 
+                        type="radio" 
+                        className="" 
+                        name="btnradio" 
+                        id="btnradio1" 
+                        autoComplete="on" 
+                        onClick={e => setSelected(e.target.id)}
+                    ></input>
+                    <label className="" htmlFor="btnradio1">All Notes</label>
+                </div>
+
+               
+                <div className="radio-wrapper">
+                    <input 
+                        type="radio" 
+                        className="" 
+                        name="btnradio" 
+                        id="btnradio2" 
+                        autoComplete="on" 
+                        onClick={e => setSelected(e.target.id)}
+                    ></input>
+                    <label className="" htmlFor="btnradio2">Priorited Notes</label>
+                </div>
+
+               
+                <div className="radio-wrapper">
+                    <input 
+                        type="radio" 
+                        className="" 
+                        name="btnradio" 
+                        id="btnradio3" 
+                        autoComplete="on"
+                        onClick={e => setSelected(e.target.id)}
+                    ></input>
+                    <label className="" htmlFor="btnradio3">Normal Notes</label>
+                </div>
             </div>
-            <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="" id="defaultCheck2" onClick={ e => setSelected(e.target.id)}></input>
-                <label className="form-check-label" htmlFor="defaultCheck2">
-                    Priorited notes
-                </label>
-            </div>
-            <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="" id="defaultCheck3" onClick={ e => setSelected(e.target.id)}></input>
-                <label className="form-check-label" htmlFor="defaultCheck2">
-                    Normal Notes
-                </label>
-            </div>
-        </div>
+        
     );
 }
 
